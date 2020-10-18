@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.txt_skip)
     void loginUser() {
         Intent intent = new Intent(this, HomeActivity.class);
-        intent.putExtra(Common.IS_LOGIN,false);
+        intent.putExtra(Common.IS_LOGIN, false);
         startActivity(intent);
 
     }
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<InstanceIdResult> task) {
                                     if (task.isSuccessful()) {
                                         Common.updateToken(getBaseContext(), task.getResult().getToken());
+                                        Log.d("token",task.getResult().getToken());
                                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                                         intent.putExtra(Common.IS_LOGIN, true);//esta diferente do video tempo 16:08
                                         startActivity(intent);
@@ -151,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
     private void checkUserFormFireBase(FirebaseUser user) {
@@ -204,8 +204,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //
 //        }
-
-
 
 
 }

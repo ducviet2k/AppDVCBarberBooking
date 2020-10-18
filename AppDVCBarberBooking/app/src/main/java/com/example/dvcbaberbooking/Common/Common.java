@@ -1,6 +1,7 @@
 package com.example.dvcbaberbooking.Common;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -26,6 +27,8 @@ import com.example.dvcbaberbooking.Model.Barber;
 import com.example.dvcbaberbooking.Model.BookingInformation;
 import com.example.dvcbaberbooking.Model.Salon;
 import com.example.dvcbaberbooking.Model.User;
+import com.example.dvcbaberbooking.R;
+import com.example.dvcbaberbooking.Service.MyFCMService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -65,6 +68,8 @@ public class Common {
     public static final String KEY_TIME_SLOT = "TIME_SLOT";
     public static final String KEY_CONFIRM_BOOKING = "CONFIRM_BOOKING";
     public static final String EVENT_URI_CACHE = "URI_EVENT_SAVE";
+    public static final String TITLE_KEY = "title";
+    public static final String CONTENT_KEY = "content";
     public static String IS_LOGIN = "IsLogin";
 
 
@@ -151,6 +156,47 @@ public class Common {
         return name.length()>13 ? new StringBuilder(name.substring(0,10)).append("...").toString():name;
     }
 
+    public static void showNotfication(Context context ,  int noti_id, String title, String content, Intent intent) {
+        PendingIntent pendingIntent = null;
+        if (intent != null)
+            pendingIntent = PendingIntent.getActivity(context,
+                    noti_id,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        String NOTIFICATION_CHANNEL_ID = "docbooking_staff_channel_01";
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel =
+                    new NotificationChannel(NOTIFICATION_CHANNEL_ID,
+                    "Doc Booking Staff App", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Staff App");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});
+            notificationChannel.enableVibration(true);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
+
+        builder.setContentTitle(title)
+                .setContentText(content)
+                .setAutoCancel(false)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher));
+
+
+        if (pendingIntent != null)
+            builder.setContentIntent(pendingIntent);
+
+        Notification notification = builder.build();
+
+        notificationManager.notify(noti_id, notification);
+
+
+    }
 
     public static enum TOKEN_TYPE {
         CLIENT,
@@ -163,9 +209,8 @@ public class Common {
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-
-
+        if (user != null)
+        {
             MyToken myToken = new MyToken();
             myToken.setToken(s);
             myToken.setTokenType(TOKEN_TYPE.CLIENT);
