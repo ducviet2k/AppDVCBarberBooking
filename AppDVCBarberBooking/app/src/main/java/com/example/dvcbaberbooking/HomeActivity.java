@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +51,29 @@ public class HomeActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     AlertDialog dialog;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //check Rating dialog
+        checkRatingDialong();
+    }
+
+    private void checkRatingDialong() {
+        Paper.init(this);
+        String dataSerialiezd = Paper.book().read(Common.RATING_INFORMATION_KEY, "");
+        if (!TextUtils.isEmpty(dataSerialiezd)) {
+            Map<String, String> dataReceived = new Gson()
+                    .fromJson(dataSerialiezd, new TypeToken<Map<String, String>>() {
+                    }.getType());
+            if (dataReceived != null) {
+                Common.showRatingDialog(HomeActivity.this,
+                        dataReceived.get(Common.RATING_STATE_KEY),
+                        dataReceived.get(Common.RATING_SALON_ID),
+                        dataReceived.get(Common.RATING_SALON_NAME),
+                        dataReceived.get(Common.RATING_BARBER_ID));
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +116,7 @@ public class HomeActivity extends AppCompatActivity {
                                     if (dialog.isShowing())
                                         dialog.dismiss();
 
-//                                 checkRatingDialog();
+
                                 }
                             }
                         });
@@ -162,7 +190,7 @@ public class HomeActivity extends AppCompatActivity {
                                     bottomSheetDialog.dismiss();
                                     if (dialog.isShowing())
                                         dialog.dismiss();
-                                    Common.currentUser=user;
+                                    Common.currentUser = user;
                                     bottomNavigationView.setSelectedItemId(R.id.action_home);
                                     dialog.dismiss();
                                     Toast.makeText(HomeActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();

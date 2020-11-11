@@ -40,14 +40,18 @@ public class MyBarberAdapter extends RecyclerView.Adapter<MyBarberAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.layout_barber,parent,false);
+                .inflate(R.layout.layout_barber, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.txt_barber_name.setText(barberList.get(position).getName());
-        holder.ratingBar.setRating((float)barberList.get(position).getRating());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
+        holder.txt_barber_name.setText(barberList.get(i).getName());
+
+        if (barberList.get(i).getRatingTimes() != null)
+            holder.ratingBar.setRating(barberList.get(i).getRating().floatValue() / barberList.get(i).getRatingTimes());
+        else
+            holder.ratingBar.setRating(0);
         if (!cardViewList.contains(holder.card_barber))
             cardViewList.add(holder.card_barber);
 
@@ -55,21 +59,20 @@ public class MyBarberAdapter extends RecyclerView.Adapter<MyBarberAdapter.MyView
             @Override
             public void onItemSelectedListener(View view, int position) {
                 //Set background cho vùng không chọn
-                for (CardView cardView : cardViewList)
-                {
+                for (CardView cardView : cardViewList) {
                     cardView.setCardBackgroundColor(context.getResources()
-                    .getColor(android.R.color.white));
+                            .getColor(android.R.color.white));
                 }
                 //Set background cho vùng chọn
                 holder.card_barber.setCardBackgroundColor(
                         context.getResources()
-                        .getColor(android.R.color.holo_orange_dark)
+                                .getColor(android.R.color.holo_orange_dark)
                 );
 
                 //Send Local broadcast to enable button next
                 Intent intent = new Intent(Common.KEY_ENABLE_BUTTON_NEXT);
-                intent.putExtra(Common.KEY_BARBER_SELECTED,barberList.get(position));
-                intent.putExtra(Common.KEY_STEP,2);
+                intent.putExtra(Common.KEY_BARBER_SELECTED, barberList.get(position));
+                intent.putExtra(Common.KEY_STEP, 2);
                 localBroadcastManager.sendBroadcast(intent);
 
             }

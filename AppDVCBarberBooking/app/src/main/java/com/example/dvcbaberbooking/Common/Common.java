@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.core.app.NotificationCompat;
 
+import com.example.dvcbaberbooking.HomeActivity;
 import com.example.dvcbaberbooking.Model.Barber;
 import com.example.dvcbaberbooking.Model.BookingInformation;
 import com.example.dvcbaberbooking.Model.Salon;
@@ -70,6 +71,16 @@ public class Common {
     public static final String EVENT_URI_CACHE = "URI_EVENT_SAVE";
     public static final String TITLE_KEY = "title";
     public static final String CONTENT_KEY = "content";
+
+
+    public static final String RATING_INFORMATION_KEY = "RATING_INFORMATION";
+    //SAO
+    public static final String RATING_STATE_KEY = "RATING_STATE";
+    public static final String RATING_SALON_ID = "RATING_SALON_ID";
+    public static final String RATING_SALON_NAME = "RATING_SALON_NAME";
+    public static final String RATING_BARBER_ID = "RATING_BARBER_ID";
+
+
     public static String IS_LOGIN = "IsLogin";
 
 
@@ -153,10 +164,10 @@ public class Common {
 
     public static String formatShoppingItemName(String name) {
 
-        return name.length()>13 ? new StringBuilder(name.substring(0,10)).append("...").toString():name;
+        return name.length() > 13 ? new StringBuilder(name.substring(0, 10)).append("...").toString() : name;
     }
 
-    public static void showNotfication(Context context ,  int noti_id, String title, String content, Intent intent) {
+    public static void showNotfication(Context context, int noti_id, String title, String content, Intent intent) {
         PendingIntent pendingIntent = null;
         if (intent != null)
             pendingIntent = PendingIntent.getActivity(context,
@@ -170,11 +181,11 @@ public class Common {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel =
                     new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                    "Doc Booking Staff App", NotificationManager.IMPORTANCE_DEFAULT);
+                            "Doc Booking Staff App", NotificationManager.IMPORTANCE_DEFAULT);
             notificationChannel.setDescription("Staff App");
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
-            notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});
+            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
             notificationChannel.enableVibration(true);
             notificationManager.createNotificationChannel(notificationChannel);
         }
@@ -198,6 +209,102 @@ public class Common {
 
     }
 
+    public static void showRatingDialog(Context context, String stateName, String salonID,
+                                        String salonName, String barberId) {
+
+        //DocumentReference
+        DocumentReference barberNeedRateRef = FirebaseFirestore.getInstance()
+                .collection("AllSalon")
+                .document(stateName)
+                .collection("Branch")
+                .document(salonID)
+                .collection("Barbers")
+                .document(barberId);
+        barberNeedRateRef.get()
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    Barber barberRate = task.getResult().toObject(Barber.class);
+                    barberRate.setBarberId(task.getResult().getId());
+
+                    //Create view for dialog
+                    View view = LayoutInflater.from(context)
+                            .inflate(R.layout.layout_rating_dialog, null);
+                    //Widget
+                    TextView txt_salon_name = (TextView) view.findViewById(R.id.txt_salon_name);
+                    TextView txt_barber_name = (TextView) view.findViewById(R.id.txt_barber_name);
+                    AppCompatRatingBar ratingBar = (AppCompatRatingBar) view.findViewById(R.id.rating);
+
+                    //set Infor
+                    txt_barber_name.setText(barberRate.getName());
+                    txt_salon_name.setText(salonName);
+
+                    //create Dialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                            .setView(view)
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Double original_rating = barberRate.getRating();
+                                    Long ratingTimes = barberRate.getRatingTimes();
+                                    float userRating = ratingBar.getRating();
+
+                                    Double finalRating = (original_rating + userRating);
+
+                                    //update Baber
+                                    Map<String, Object> data_update = new HashMap<>();
+                                    data_update.put("rating", finalRating);
+                                    data_update.put("ratingTimes", ++ratingTimes);
+
+                                    barberNeedRateRef.update(data_update)
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(context, "Cảm ơn bạn đã đánh giá! ", Toast.LENGTH_SHORT).show();
+                                                        Paper.init(context);
+                                                        Paper.book().delete(Common.RATING_INFORMATION_KEY);
+                                                    }
+                                                }
+                                            });
+
+                                }
+                            })
+                            .setNegativeButton("SKIP", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            })
+                            .setNeutralButton("NEVER", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int i) {
+                                    Paper.init(context);
+                                    Paper.book().delete(Common.RATING_INFORMATION_KEY);
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        });
+
+
+    }
+
     public static enum TOKEN_TYPE {
         CLIENT,
         BARBER,
@@ -208,11 +315,8 @@ public class Common {
     public static void updateToken(Context context, final String s) {
 
 
-
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null)
-        {
+        if (user != null) {
             MyToken myToken = new MyToken();
             myToken.setToken(s);
             myToken.setTokenType(TOKEN_TYPE.CLIENT);

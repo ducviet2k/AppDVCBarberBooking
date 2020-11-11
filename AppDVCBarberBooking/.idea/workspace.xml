@@ -10,7 +10,32 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9661db9e-7a54-452e-b6ff-4c6d6f1ffe1d" name="Default Changelist" comment="" />
+    <list default="true" id="9661db9e-7a54-452e-b6ff-4c6d6f1ffe1d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_d_max_spots_dialog_1_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_d_max_spots_dialog_1_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_karumi_dexter_5_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_karumi_dexter_5_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_ss_bannerslider_bannerslider_2_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_ss_bannerslider_bannerslider_2_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__devs_mulham_horizontalcalendar_horizontalcalendar_1_3_4_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__devs_mulham_horizontalcalendar_horizontalcalendar_1_3_4_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MyBarberAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MyBarberAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Common/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Common/Common.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/HomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Model/Barber.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Model/Barber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Service/MyFCMService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Service/MyFCMService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,10 +62,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="Interface" />
         <option value="Class" />
         <option value="resourceFile" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -59,7 +84,7 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-18T11:51:27.823Z" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="memory.settings.postsync.last.time.stamp" value="1604927343202" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1605102782110" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.1632784410">
@@ -152,8 +177,8 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="539" y="136" key="#com.intellij.ide.util.MemberChooser" timestamp="1604928662251">
-      <screen x="46" y="23" width="1320" height="745" />
+    <state x="752" y="183" key="#com.intellij.ide.util.MemberChooser" timestamp="1605105968638">
+      <screen x="55" y="23" width="1865" height="1057" />
     </state>
     <state x="574" y="127" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1602322721667" />
     <state x="1844" y="175" key="#com.intellij.ide.util.MemberChooser/1366.23.1280.1001/39.23.1327.745@1366.23.1280.1001" timestamp="1602485761437" />
@@ -161,6 +186,7 @@
     <state x="539" y="136" key="#com.intellij.ide.util.MemberChooser/46.23.1320.745@46.23.1320.745" timestamp="1604928662251" />
     <state x="749" y="184" key="#com.intellij.ide.util.MemberChooser/51.23.1869.1057@51.23.1869.1057" timestamp="1602384266300" />
     <state x="750" y="184" key="#com.intellij.ide.util.MemberChooser/53.23.1867.1057@53.23.1867.1057" timestamp="1603008256028" />
+    <state x="752" y="183" key="#com.intellij.ide.util.MemberChooser/55.23.1865.1057@55.23.1865.1057" timestamp="1605105968638" />
     <state x="465" y="283" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1602344799318">
       <screen x="51" y="23" width="1869" height="1057" />
     </state>
@@ -173,11 +199,12 @@
       <screen x="46" y="23" width="1320" height="745" />
     </state>
     <state x="296" y="290" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/46.23.1320.745@46.23.1320.745" timestamp="1604928918529" />
-    <state x="561" y="313" key="AndroidCreateResourceFileDialog" timestamp="1604726824028">
-      <screen x="51" y="23" width="1869" height="1057" />
+    <state x="564" y="313" key="AndroidCreateResourceFileDialog" timestamp="1605103928972">
+      <screen x="55" y="23" width="1865" height="1057" />
     </state>
     <state x="1715" y="298" key="AndroidCreateResourceFileDialog/1366.23.1280.1001/39.23.1327.745@1366.23.1280.1001" timestamp="1602480386878" />
     <state x="561" y="313" key="AndroidCreateResourceFileDialog/51.23.1869.1057@51.23.1869.1057" timestamp="1604726824028" />
+    <state x="564" y="313" key="AndroidCreateResourceFileDialog/55.23.1865.1057@55.23.1865.1057" timestamp="1605103928972" />
     <state x="760" y="433" key="Github.ShareDialog" timestamp="1602862026141">
       <screen x="53" y="23" width="1867" height="1057" />
     </state>
@@ -290,8 +317,8 @@
     <state width="1099" height="320" key="GridCell.Tab.1.right/1366.23.1280.1001/39.23.1327.745@1366.23.1280.1001" timestamp="1602488801598" />
     <state width="1564" height="374" key="GridCell.Tab.1.right/51.23.1869.1057@51.23.1869.1057" timestamp="1602346462539" />
     <state width="1477" height="188" key="GridCell.Tab.1.right/55.23.1865.1057@55.23.1865.1057" timestamp="1604650071060" />
-    <state x="446" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1604927311495">
-      <screen x="46" y="23" width="1320" height="745" />
+    <state x="620" y="328" key="com.intellij.ide.util.TipDialog" timestamp="1605107070145">
+      <screen x="55" y="23" width="1865" height="1057" />
     </state>
     <state x="465" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1602315342184" />
     <state x="441" y="238" key="com.intellij.ide.util.TipDialog/1366.23.1280.1001/39.23.1327.745@39.23.1327.745" timestamp="1602478536360" />
@@ -302,7 +329,7 @@
     <state x="618" y="328" key="com.intellij.ide.util.TipDialog/52.23.1868.1057@52.23.1868.1057" timestamp="1602775808303" />
     <state x="619" y="328" key="com.intellij.ide.util.TipDialog/53.23.1867.1057@53.23.1867.1057" timestamp="1602993131316" />
     <state x="619" y="328" key="com.intellij.ide.util.TipDialog/54.23.1866.1057@54.23.1866.1057" timestamp="1604156441516" />
-    <state x="620" y="328" key="com.intellij.ide.util.TipDialog/55.23.1865.1057@55.23.1865.1057" timestamp="1604650188944" />
+    <state x="620" y="328" key="com.intellij.ide.util.TipDialog/55.23.1865.1057@55.23.1865.1057" timestamp="1605107070145" />
     <state x="1692" y="295" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1602402403878">
       <screen x="1366" y="23" width="1280" height="1001" />
     </state>
