@@ -1,7 +1,7 @@
 package com.example.dvcbaberbooking.Fragments;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -14,14 +14,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dvcbaberbooking.Adapter.MyBarberAdapter;
 import com.example.dvcbaberbooking.Adapter.MyTimeSlotAdapter;
 import com.example.dvcbaberbooking.Common.Common;
 import com.example.dvcbaberbooking.Common.SpaceItemDecoration;
 import com.example.dvcbaberbooking.Interface.ITimeSlotLoadListener;
+import com.example.dvcbaberbooking.Model.EventBus.BarberDoneEvent;
+import com.example.dvcbaberbooking.Model.EventBus.DisplayTimeSlotEvent;
 import com.example.dvcbaberbooking.Model.TimeSlot;
 import com.example.dvcbaberbooking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +36,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,7 +61,6 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
     AlertDialog dialog;
 
     Unbinder unbinder;
-    LocalBroadcastManager localBroadcastManager;
     Calendar selected_date;
 
     @BindView(R.id.recycler_time_slot)
@@ -64,15 +70,40 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
 
     SimpleDateFormat simpleDateFormat;
 
-    BroadcastReceiver displayTimeSlot = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Calendar date = Calendar.getInstance();
-            date.add(Calendar.DATE, 0); //add date hiện tại
-            loadAvailableTimeSlotOfBarber(Common.currentBarber.getBarberId(),
-                    simpleDateFormat.format(date.getTime()));
-        }
-    };
+    //========================>
+    //EventBus START
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+
+    }
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public  void loadAllTimeSlotAvailable(DisplayTimeSlotEvent event)
+    {
+          if (event.isDisplay())
+          {
+              Calendar date = Calendar.getInstance();
+              date.add(Calendar.DATE, 0); //add date hiện tại
+              loadAvailableTimeSlotOfBarber(Common.currentBarber.getBarberId(),
+                      simpleDateFormat.format(date.getTime()));
+          }
+
+    }
+
+
+
+
+    //========================
+
+
 
     private void loadAvailableTimeSlotOfBarber(String barberId, String bookDate) {
         dialog.show();
@@ -142,9 +173,6 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
 
         iTimeSlotLoadListener = this;
 
-        localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
-        localBroadcastManager.registerReceiver(displayTimeSlot, new IntentFilter(Common.KEY_DISPLAY_TIME_SLOT));
-
         simpleDateFormat = new SimpleDateFormat("dd_MM_yyyy"); //06_10_2020 this is block
 
         dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
@@ -153,11 +181,6 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
         selected_date.add(Calendar.DATE, 0); //init date hiện tại
     }
 
-    @Override
-    public void onDestroy() {
-        localBroadcastManager.unregisterReceiver(displayTimeSlot);
-        super.onDestroy();
-    }
 
     @Nullable
     @Override
