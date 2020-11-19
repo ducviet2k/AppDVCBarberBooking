@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
@@ -52,6 +55,11 @@ public class HomeActivity extends AppCompatActivity {
     AlertDialog dialog;
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         //check Rating dialog
@@ -75,6 +83,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+//
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +106,6 @@ public class HomeActivity extends AppCompatActivity {
 
             if (islogin) {
                 dialog.show();
-
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 //check if user
                 //save userPhone by Paper
@@ -110,8 +122,8 @@ public class HomeActivity extends AppCompatActivity {
                                         showUpdateDialog(user.getPhoneNumber());
                                     } else {
                                         Common.currentUser = userSnapShot.toObject(User.class);
-                                        showUpdateDialog(user.getPhoneNumber());
-//                                        bottomNavigationView.setSelectedItemId(R.id.action_home);
+                                       showUpdateDialog(user.getPhoneNumber());
+                                        //bottomNavigationView.setSelectedItemId(R.id.action_home);
                                     }
                                     if (dialog.isShowing())
                                         dialog.dismiss();
@@ -200,7 +212,7 @@ public class HomeActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             dialog.isShowing();
                             dialog.dismiss();
-                            bottomSheetDialog.dismiss();
+                        //    bottomSheetDialog.dismiss();
                             Toast.makeText(HomeActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });

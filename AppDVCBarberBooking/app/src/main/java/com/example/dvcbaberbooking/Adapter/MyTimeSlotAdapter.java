@@ -55,13 +55,13 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.txt_time_slot.setText(new StringBuilder(Common.convertTimeSlotToString(position)).toString());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int i ) {
+        holder.txt_time_slot.setText(new StringBuilder(Common.convertTimeSlotToString(i)).toString());
         if (timeSlotList.size() == 0) //nếu tất cả vị trí có sẵn thì sẽ show list ra
         {
 
+            holder.card_time_slot.setEnabled(true);
             holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
-
             holder.txt_time_slot_description.setText("Available");
             holder.txt_time_slot_description.setTextColor(context.getResources().getColor(android.R.color.black));
             holder.txt_time_slot.setTextColor(context.getResources().getColor(android.R.color.black));
@@ -71,10 +71,11 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
         {
             for (TimeSlot slotValue : timeSlotList) {
                 int slot = Integer.parseInt(slotValue.getSlot().toString());
-                if (slot == position) // nếu slot = position
+                if (slot == i) // nếu slot = position
                 {
 
                     //dat the cho thoi gian se day
+                    holder.card_time_slot.setEnabled(false);
                     holder.card_time_slot.setTag(Common.DISABLE_TAG);
                     holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(android.R.color.darker_gray));
                     holder.txt_time_slot_description.setText("Full");

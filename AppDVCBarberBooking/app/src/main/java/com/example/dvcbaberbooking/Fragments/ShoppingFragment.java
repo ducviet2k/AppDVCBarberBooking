@@ -38,6 +38,7 @@ import butterknife.Unbinder;
 
 public class ShoppingFragment extends Fragment implements IShoppingDataLoadListener {
     CollectionReference shoppingItemRef;
+    MyShoppingItemAdapter adapter;
     //interface
     IShoppingDataLoadListener iShoppingDataLoadListener;
 
@@ -156,7 +157,7 @@ public class ShoppingFragment extends Fragment implements IShoppingDataLoadListe
 
     @Override
     public void onShoppingDataLoadSuccess(List<ShoppingItem> shoppingItemList) {
-        MyShoppingItemAdapter adapter = new MyShoppingItemAdapter(getContext(), shoppingItemList);
+         adapter = new MyShoppingItemAdapter(getContext(), shoppingItemList);
         recycler_items.setAdapter(adapter);
     }
 
@@ -164,5 +165,12 @@ public class ShoppingFragment extends Fragment implements IShoppingDataLoadListe
     public void onShopingDataLoadFaile(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        if (adapter != null)
+            adapter.onDestroy();
+        super.onDestroy();
     }
 }
