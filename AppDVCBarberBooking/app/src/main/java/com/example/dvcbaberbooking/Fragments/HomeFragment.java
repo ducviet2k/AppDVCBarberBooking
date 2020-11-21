@@ -27,16 +27,20 @@ import com.example.dvcbaberbooking.Adapter.LookbookAdapter;
 import com.example.dvcbaberbooking.BookingActivity;
 import com.example.dvcbaberbooking.CartActivity;
 import com.example.dvcbaberbooking.Common.Common;
+import com.example.dvcbaberbooking.Database.CartDataSource;
 import com.example.dvcbaberbooking.Database.CartDatabase;
+<<<<<<< HEAD
 import com.example.dvcbaberbooking.Database.DatabaseUtils;
+=======
+import com.example.dvcbaberbooking.Database.LocalCartDataSource;
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
+import com.example.dvcbaberbooking.HistoryActivity;
 import com.example.dvcbaberbooking.Interface.IBannerLoadListener;
 import com.example.dvcbaberbooking.Interface.IBookingInfoLoadListener;
 import com.example.dvcbaberbooking.Interface.IBookingInformationChangeListener;
-import com.example.dvcbaberbooking.Interface.ICountItemInCartListener;
 import com.example.dvcbaberbooking.Interface.ILookbookLoadListener;
 import com.example.dvcbaberbooking.Model.Banner;
 import com.example.dvcbaberbooking.Model.BookingInformation;
-import com.example.dvcbaberbooking.Model.User;
 import com.example.dvcbaberbooking.R;
 import com.example.dvcbaberbooking.Service.PicassoImageLoadingService;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,8 +62,6 @@ import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,15 +70,19 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import ss.com.bannerslider.Slider;
 
-public class HomeFragment extends Fragment implements IBannerLoadListener, ILookbookLoadListener, IBookingInfoLoadListener, IBookingInformationChangeListener, ICountItemInCartListener {
+public class HomeFragment extends Fragment implements IBannerLoadListener, ILookbookLoadListener, IBookingInfoLoadListener, IBookingInformationChangeListener {
 
     //video 12 hiển thị danh sách giỏ hàng và thêm số hàng mua và cộng vào tổng tiền
     AlertDialog dialog;
-    CartDatabase cartDatabase;
 
 
+    CartDataSource cartDataSource;
     @BindView(R.id.notification_badge)
     NotificationBadge notificationBadge;
 
@@ -102,6 +108,8 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
     TextView txt_time;
     @BindView(R.id.txt_time_remain)
     TextView txt_time_remain;
+
+//    @OnClick (R.id.layout_user_information)
 
     @OnClick(R.id.btn_delete_booking)
     void deleteBooking() {
@@ -215,6 +223,11 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
         startActivity(new Intent(getActivity(), CartActivity.class));
     }
 
+    @OnClick(R.id.card_view_histoy)
+    void opHistoryActivity() {
+        startActivity(new Intent(getActivity(), HistoryActivity.class));
+    }
+
     // firestore
     CollectionReference bannerRef, lookbookRef;
     IBannerLoadListener iBannerLoadListener;
@@ -247,7 +260,7 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
     }
 
     private void loadUserBooking() {
-        CollectionReference userBooking = FirebaseFirestore.getInstance()
+        final CollectionReference userBooking = FirebaseFirestore.getInstance()
                 .collection("User")
                 .document(Common.currentUser.getPhoneNumber())
                 .collection("Booking");
@@ -257,9 +270,9 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
 
-        Timestamp todayTimestamp = new Timestamp(calendar.getTime());
+        Timestamp timestamp = new Timestamp(calendar.getTime());
         userBooking
-                .whereGreaterThanOrEqualTo("timestamp", todayTimestamp)
+                .whereGreaterThanOrEqualTo("timestamp", timestamp)
                 .whereEqualTo("done", false)
                 .limit(1)
                 .get()
@@ -312,7 +325,7 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, view);
-        cartDatabase = CartDatabase.getInstance(getContext());
+        cartDataSource = new LocalCartDataSource(CartDatabase.getInstance(getContext()).cartDAO());
 
         //init
         Slider.init(new PicassoImageLoadingService());
@@ -348,7 +361,26 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
     }
 
     private void countCartItem() {
-        DatabaseUtils.countItemInCart(cartDatabase, this);
+       // DatabaseUtils.countItemInCart(cartDatabase, this);
+        cartDataSource.countItemInCart(Common.currentUser.getPhoneNumber())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Integer integer) {
+                        notificationBadge.setText(String.valueOf(integer));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void setUserInformation() {
@@ -461,17 +493,12 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
         startActivity(new Intent(getActivity(), BookingActivity.class));
     }
 
-    @Override
-    public void onCartItemCountSuccess(int count) {
-        notificationBadge.setText(String.valueOf(count));
-    }
+
 
     @Override
     public void onDestroy() {
-        if (userBookingListener != null) {
+        if (userBookingListener != null)
             userBookingListener.remove();
-
-        }
         super.onDestroy();
     }
 }

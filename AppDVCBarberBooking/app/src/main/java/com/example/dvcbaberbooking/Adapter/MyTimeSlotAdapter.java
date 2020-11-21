@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dvcbaberbooking.Common.Common;
 import com.example.dvcbaberbooking.Interface.IRecyclerItemSelectedListener;
+import com.example.dvcbaberbooking.Model.EventBus.EnableNextButton;
 import com.example.dvcbaberbooking.Model.TimeSlot;
 import com.example.dvcbaberbooking.R;
 
@@ -28,12 +29,12 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
     List<TimeSlot> timeSlotList;
 
     List<CardView> cardViewList;
-    LocalBroadcastManager localBroadcastManager;
+
 
     public MyTimeSlotAdapter(Context context) {
         this.context = context;
         this.timeSlotList = new ArrayList<>();
-        localBroadcastManager = LocalBroadcastManager.getInstance(context);
+
         cardViewList = new ArrayList<>();
 
     }
@@ -41,7 +42,7 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
     public MyTimeSlotAdapter(Context context, List<TimeSlot> timeSlotList) {
         this.context = context;
         this.timeSlotList = timeSlotList;
-        localBroadcastManager = LocalBroadcastManager.getInstance(context);
+
         cardViewList = new ArrayList<>();
     }
 
@@ -54,13 +55,13 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.txt_time_slot.setText(new StringBuilder(Common.convertTimeSlotToString(position)).toString());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int i ) {
+        holder.txt_time_slot.setText(new StringBuilder(Common.convertTimeSlotToString(i)).toString());
         if (timeSlotList.size() == 0) //nếu tất cả vị trí có sẵn thì sẽ show list ra
         {
 
+            holder.card_time_slot.setEnabled(true);
             holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
-
             holder.txt_time_slot_description.setText("Available");
             holder.txt_time_slot_description.setTextColor(context.getResources().getColor(android.R.color.black));
             holder.txt_time_slot.setTextColor(context.getResources().getColor(android.R.color.black));
@@ -70,10 +71,11 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
         {
             for (TimeSlot slotValue : timeSlotList) {
                 int slot = Integer.parseInt(slotValue.getSlot().toString());
-                if (slot == position) // nếu slot = position
+                if (slot == i) // nếu slot = position
                 {
 
                     //dat the cho thoi gian se day
+                    holder.card_time_slot.setEnabled(false);
                     holder.card_time_slot.setTag(Common.DISABLE_TAG);
                     holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(android.R.color.darker_gray));
                     holder.txt_time_slot_description.setText("Full");
@@ -98,11 +100,8 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                 holder.card_time_slot.setCardBackgroundColor(context.getResources()
                         .getColor(android.R.color.holo_orange_dark));
 
-                Intent intent = new Intent(Common.KEY_ENABLE_BUTTON_NEXT);
-                intent.putExtra(Common.KEY_TIME_SLOT, i);
-                intent.putExtra(Common.KEY_STEP, 3);
-                localBroadcastManager.sendBroadcast(intent);
-
+                //EventBus
+                EventBus.getDefault().postSticky(new EnableNextButton(3,i));
 
             }
         });

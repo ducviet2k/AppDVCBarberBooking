@@ -4,6 +4,8 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.dvcbaberbooking.Common.Common;
 import com.example.dvcbaberbooking.Interface.ICartItemLoadListener;
 import com.example.dvcbaberbooking.Interface.ICountItemInCartListener;
@@ -14,6 +16,10 @@ import java.util.List;
 public class DatabaseUtils {
 
 
+    public static void clearCart(CartDatabase db){
+        ClearCartAsync task = new ClearCartAsync(db);
+        task.execute();
+    }
 
     public static void sumCart(CartDatabase db, ISumCartListener iSumCartListener) {
         SumCartAsync task = new SumCartAsync(db, iSumCartListener);
@@ -45,7 +51,11 @@ public class DatabaseUtils {
         task.execute();
 
     }
-
+    public static void deleteCart(@NonNull final CartDatabase db, CartItem cartItem)
+    {
+        DeleteCartAsync task = new DeleteCartAsync(db);
+        task.execute(cartItem);
+    }
 
     //Async task\
 
@@ -165,6 +175,42 @@ public class DatabaseUtils {
 
         private int countItemInCartRun(CartDatabase db) {
             return db.cartDAO().countItemInCart(Common.currentUser.getPhoneNumber());
+        }
+    }
+
+
+    private static class DeleteCartAsync extends AsyncTask<CartItem, Void, Void> {
+        private final CartDatabase db;
+
+
+        private DeleteCartAsync(CartDatabase db) {
+            this.db = db;
+        }
+
+        @Override
+        protected Void doInBackground(CartItem... cartItems) {
+            db.cartDAO().delete(cartItems[0]);
+            return null;
+        }
+    }
+
+    private static class ClearCartAsync extends AsyncTask<Void, Void, Void> {
+        private final CartDatabase db;
+
+
+        public ClearCartAsync(CartDatabase db) {
+            this.db = db;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            clearAllItemFromCart(db);
+            return null;
+        }
+
+        private void clearAllItemFromCart(CartDatabase db) {
+            db.cartDAO().clearCart(Common.currentUser.getPhoneNumber());
         }
     }
 }

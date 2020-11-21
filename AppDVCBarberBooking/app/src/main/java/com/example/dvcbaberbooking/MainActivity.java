@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -194,6 +196,20 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //    }
+<<<<<<< HEAD
+    @Override
+    public void onBackPressed() {
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finish();
+            return;
+
+
+        }
+
+    }
+=======
 //    @Override
 //    public void onBackPressed() {
 //
@@ -204,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //
 //        }
-
-
+//
+//    }
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
 }

@@ -1,32 +1,39 @@
 package com.example.dvcbaberbooking.Fragments;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
-import android.util.AndroidException;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import com.example.dvcbaberbooking.Common.Common;
+<<<<<<< HEAD
+import com.example.dvcbaberbooking.Database.CartDatabase;
+import com.example.dvcbaberbooking.Database.CartItem;
+import com.example.dvcbaberbooking.Database.DatabaseUtils;
+import com.example.dvcbaberbooking.HomeActivity;
+import com.example.dvcbaberbooking.Interface.ICartItemLoadListener;
+import com.example.dvcbaberbooking.MainActivity;
+=======
+import com.example.dvcbaberbooking.Database.CartDataSource;
+import com.example.dvcbaberbooking.Database.CartDatabase;
+import com.example.dvcbaberbooking.Database.LocalCartDataSource;
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
 import com.example.dvcbaberbooking.Model.BookingInformation;
+import com.example.dvcbaberbooking.Model.EventBus.ConfirmBookingEvent;
 import com.example.dvcbaberbooking.Model.FCMResponse;
 import com.example.dvcbaberbooking.Model.FCMSenData;
 import com.example.dvcbaberbooking.Model.MyNotification;
@@ -46,15 +53,18 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
-
-import javax.xml.parsers.DocumentBuilder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,20 +72,25 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
-import io.reactivex.Scheduler;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class BookingStep4Fragment extends Fragment {
+public class BookingStep4Fragment extends Fragment implements ICartItemLoadListener {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     SimpleDateFormat simpleDateFormat;
-    LocalBroadcastManager localBroadcastManager;
+<<<<<<< HEAD
+
+=======
+    CartDataSource cartDataSource;
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     Unbinder unbinder;
     AlertDialog dialog;
     IFCMApi ifcmApi;
-
     @BindView(R.id.txt_booking_baber_text)
     TextView txt_booking_baber_text;
     @BindView(R.id.txt_booking_time_text)
@@ -94,201 +109,332 @@ public class BookingStep4Fragment extends Fragment {
     @OnClick(R.id.btn_confirm)
         //tao man booking
     void confirmBooking() {
-//        dialog.show();
-        String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
-        String[] convertTime = startTime.split("-");
-        String[] startTimeConvert = convertTime[0].split(":");
-        int startHourInt = Integer.parseInt(startTimeConvert[0].trim());
-        int startMinInt = Integer.parseInt(startTimeConvert[1].trim());
-
-        Calendar bookingDateWithourHouse = Calendar.getInstance();
-        bookingDateWithourHouse.setTimeInMillis(Common.bookingDate.getTimeInMillis());
-        bookingDateWithourHouse.set(Calendar.HOUR_OF_DAY, startHourInt);
-        bookingDateWithourHouse.set(Calendar.MINUTE, startMinInt);
-        Timestamp timestamp = new Timestamp(bookingDateWithourHouse.getTime());
-
-        BookingInformation bookingInformation = new BookingInformation();
-
-        bookingInformation.setCityBook(Common.city);
-        bookingInformation.setTimestamp(timestamp);
-
-        bookingInformation.setDone(false);
-        bookingInformation.setBarberId(Common.currentBarber.getBarberId());
-        bookingInformation.setBarberName(Common.currentBarber.getName());
-        bookingInformation.setCustomerName(Common.currentUser.getName());
-        bookingInformation.setCustomerPhone(Common.currentUser.getPhoneNumber());
-        bookingInformation.setSalonId(Common.currentSalon.getSalonId());
-        bookingInformation.setSalonAddress(Common.currentSalon.getAddress());
-        bookingInformation.setSalonName(Common.currentSalon.getName());
-        bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
-                .append(" at ")
-                .append(simpleDateFormat.format(bookingDateWithourHouse.getTime())).toString());
-        bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
-
-        //submit to banner Document
-
-        DocumentReference bookingdate = FirebaseFirestore.getInstance()
-                .collection("AllSalon")
-                .document(Common.city)
-                .collection("Branch")
-                .document(Common.currentSalon.getSalonId())
-                .collection("Barbers")
-                .document(Common.currentBarber.getBarberId())
-                .collection(Common.simpleDateFormat.format(Common.bookingDate.getTime()))
-                .document(String.valueOf(Common.currentTimeSlot));
-
-        //ghi du lieu
-
-        bookingdate.set(bookingInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
+        dialog.show();
+<<<<<<< HEAD
+        DatabaseUtils.getAllCart(CartDatabase.getInstance(getContext()),
+                this);
+=======
+        compositeDisposable.add(cartDataSource.getAllItemFromCart(Common.currentUser.getPhoneNumber())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(cartItems -> {
 
 
-                addToUserBooking(bookingInformation);
+            String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
+            String[] convertTime = startTime.split("-");
+            String[] startTimeConvert = convertTime[0].split(":");
+            int startHourInt = Integer.parseInt(startTimeConvert[0].trim());
+            int startMinInt = Integer.parseInt(startTimeConvert[1].trim());
+
+            Calendar bookingDateWithourHouse = Calendar.getInstance();
+            bookingDateWithourHouse.setTimeInMillis(Common.bookingDate.getTimeInMillis());
+            bookingDateWithourHouse.set(Calendar.HOUR_OF_DAY, startHourInt);
+            bookingDateWithourHouse.set(Calendar.MINUTE, startMinInt);
+            Timestamp timestamp = new Timestamp(bookingDateWithourHouse.getTime());
+
+            BookingInformation bookingInformation = new BookingInformation();
+
+            bookingInformation.setCityBook(Common.city);
+            bookingInformation.setTimestamp(timestamp);
+
+            bookingInformation.setDone(false);
+            bookingInformation.setBarberId(Common.currentBarber.getBarberId());
+            bookingInformation.setBarberName(Common.currentBarber.getName());
+            bookingInformation.setCustomerName(Common.currentUser.getName());
+            bookingInformation.setCustomerPhone(Common.currentUser.getPhoneNumber());
+            bookingInformation.setSalonId(Common.currentSalon.getSalonId());
+            bookingInformation.setSalonAddress(Common.currentSalon.getAddress());
+            bookingInformation.setSalonName(Common.currentSalon.getName());
+            bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
+                    .append(" at ")
+                    .append(simpleDateFormat.format(bookingDateWithourHouse.getTime())).toString());
+            bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
+            bookingInformation.setCartItemList(cartItems);//add card item list to booking information
+
+            //submit to banner Document
+
+            DocumentReference bookingdate = FirebaseFirestore.getInstance()
+                    .collection("AllSalon")
+                    .document(Common.city)
+                    .collection("Branch")
+                    .document(Common.currentSalon.getSalonId())
+                    .collection("Barbers")
+                    .document(Common.currentBarber.getBarberId())
+                    .collection(Common.simpleDateFormat.format(Common.bookingDate.getTime()))
+                    .document(String.valueOf(Common.currentTimeSlot));
+
+            //ghi du lieu
+
+            bookingdate.set(bookingInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+
+                   // DatabaseUtils.clearCart(CartDatabase.getInstance(getContext()));
+                    cartDataSource.clearCart(Common.currentUser.getPhoneNumber())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new SingleObserver<Integer>() {
+                                @Override
+                                public void onSubscribe(Disposable d) {
+
+                                }
+
+                                @Override
+                                public void onSuccess(Integer integer) {
+                                    addToUserBooking(bookingInformation);
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }, throwable -> {
+            Toast.makeText(getContext(), ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        }));
+//        DatabaseUtils.getAllCart(CartDatabase.getInstance(getContext()),
+//                this);
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     }
 
-    private void addToUserBooking(BookingInformation bookingInformation) {
-//        resestStaticData();
-//        getActivity().finish();
-//        Toast.makeText(getContext(), "Seccesa", Toast.LENGTH_SHORT).show();
 
-        CollectionReference userBooking = FirebaseFirestore.getInstance()
+    private void addToUserBooking(BookingInformation bookingInformation) {
+
+        final CollectionReference userBooking = FirebaseFirestore.getInstance()
                 .collection("User")
                 .document(Common.currentUser.getPhoneNumber())
                 .collection("Booking");
-
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
+        Timestamp timestamp = new Timestamp(calendar.getTime());
 
-        Timestamp todayTimestamp = new Timestamp(calendar.getTime());
-
-        userBooking
-                .whereGreaterThanOrEqualTo("timestamp", todayTimestamp)
+        userBooking.whereGreaterThanOrEqualTo("timestamp", timestamp)
                 .whereEqualTo("done", false)
                 .limit(1)
                 .get()
-                .addOnCompleteListener(task -> {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.getResult().isEmpty()) {
+                            userBooking.document()
+                                    .set(bookingInformation)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
 
-                    if (task.getResult().isEmpty()) {
-                        //setdata
-                        userBooking.document()
-                                .set(bookingInformation)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
+                                            MyNotification myNotification = new MyNotification();
+                                            myNotification.setUid(UUID.randomUUID().toString());
+                                            myNotification.setTitle("New Booking");
+                                            myNotification.setConten("You have a new appoiment for customer hair care with " + Common.currentUser.getName());
+                                            myNotification.setRead(false);
+                                            myNotification.setServerTimestamp(FieldValue.serverTimestamp());
 
-                                        //create notifile
-                                        MyNotification myNotification = new MyNotification();
-                                        myNotification.setUid(UUID.randomUUID().toString());
-                                        myNotification.setTitle("New Booking");
-                                        myNotification.setConten("You have a new appoiment for customer hair care!" + Common.currentUser.getName());
-                                        myNotification.setRead(false);
-                                        myNotification.setServerTimestamp(FieldValue.serverTimestamp());
-                                        //submit notifition coollection
-                                        FirebaseFirestore.getInstance()
-                                                .collection("AllSalon")
-                                                .document(Common.city)
-                                                .collection("Branch")
-                                                .document(Common.currentSalon.getSalonId())
-                                                .collection("Barbers")
-                                                .document(Common.currentBarber.getBarberId())
-                                                .collection("Notifications")
-                                                .document(myNotification.getUid())
-                                                .set(myNotification)
-                                                .addOnSuccessListener(aVoid1 -> {
-                                                    //
-                                                    FirebaseFirestore.getInstance()
-                                                            .collection("Tokens")
-                                                            .whereEqualTo("userPhone", Common.currentBarber.getUsername())
-                                                            .limit(1)
-                                                            .get()
-                                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                                    if (task.isSuccessful() && task.getResult().size() > 0) {
-                                                                        MyToken myToken = new MyToken();
-                                                                        for (DocumentSnapshot tokensSnapshot : task.getResult())
-                                                                            myToken = tokensSnapshot.toObject(MyToken.class);
-                                                                        //create data
-                                                                        FCMSenData sendRequest = new FCMSenData();
-                                                                        Map<String, String> dataSend = new HashMap<>();
-                                                                        dataSend.put(Common.TITLE_KEY, "New Booking");
-                                                                        dataSend.put(Common.CONTENT_KEY, "You have new booking from user" + Common.currentUser.getName());
+                                            FirebaseFirestore.getInstance()
+                                                    .collection("AllSalon")
+                                                    .document(Common.city)
+                                                    .collection("Branch")
+                                                    .document(Common.currentSalon.getSalonId())
+                                                    .collection("Barbers")
+                                                    .document(Common.currentBarber.getBarberId())
+                                                    .collection("Notifications")
+                                                    .document(myNotification.getUid())
+                                                    .set(myNotification)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            FirebaseFirestore.getInstance().collection("Tokens")
+                                                                    .whereEqualTo("userPhone", Common.currentBarber.getUsername())
+                                                                    .limit(1)
+                                                                    .get()
+                                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                            if (task.isSuccessful() && task.getResult().size() > 0) {
+                                                                                MyToken myToken = new MyToken();
+                                                                                for (DocumentSnapshot tokenSnapshot : task.getResult())
+                                                                                    myToken = tokenSnapshot.toObject(MyToken.class);
 
-                                                                        sendRequest.setTo(myToken.getToken());
-                                                                        sendRequest.setData(dataSend);
+                                                                                FCMSenData sendRequest = new FCMSenData();
+                                                                                Map<String, String> dataSend = new HashMap<>();
+                                                                                dataSend.put(Common.TITLE_KEY, "New Booking");
+                                                                                dataSend.put(Common.CONTENT_KEY, "You have new booking from user" + Common.currentUser.getName());
+                                                                                ///////////////////////////
+                                                                                sendRequest.setTo(myToken.getToken());
+                                                                                sendRequest.setData(dataSend);
+                                                                                compositeDisposable.add(ifcmApi.senNotification(sendRequest)
+                                                                                        .subscribeOn(Schedulers.io())
+                                                                                        .observeOn(AndroidSchedulers.mainThread())
+                                                                                        .subscribe(new Consumer<FCMResponse>() {
+                                                                                            @Override
+                                                                                            public void accept(FCMResponse fcmResponse) throws Exception {
+                                                                                                if (dialog.isShowing())
+                                                                                                dialog.dismiss();
+<<<<<<< HEAD
+=======
 
-                                                                        compositeDisposable.add(ifcmApi.senNotification(sendRequest)
-                                                                                .subscribeOn(Schedulers.io())
-                                                                                .observeOn(AndroidSchedulers.mainThread())
-                                                                                .subscribe(new Consumer<FCMResponse>() {
-                                                                                    @Override
-                                                                                    public void accept(FCMResponse fcmResponse) throws Exception {
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
+                                                                                                addToCalendar(Common.bookingDate,
+                                                                                                        Common.convertTimeSlotToString(Common.currentTimeSlot));
+                                                                                                resestStaticData();
+                                                                                                getActivity().finish();
+                                                                                                Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
 
-                                                                                        dialog.dismiss();
 
-                                                                                        addToCalendar(Common.bookingDate,
-                                                                                                Common.convertTimeSlotToString(Common.currentTimeSlot));
-                                                                                        resestStaticData();
-                                                                                        getActivity().finish();
-                                                                                        Toast.makeText(getContext(), "Đặt lịch thành công !", Toast.LENGTH_SHORT).show();
+                                                                                            }
+                                                                                        }, new Consumer<Throwable>() {
+                                                                                            @Override
+                                                                                            public void accept(Throwable throwable) throws Exception {
+                                                                                                if (dialog.isShowing())
+                                                                                                    dialog.dismiss();
+<<<<<<< HEAD
+=======
+//                                                                                                Log.d("NOTIFICATION_ERROR", throwable.getMessage());
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
+                                                                                                    addToCalendar(Common.bookingDate,
+                                                                                                        Common.convertTimeSlotToString(Common.currentTimeSlot));
+                                                                                                resestStaticData();
+                                                                                                getActivity().finish();
 
-                                                                                    }
-                                                                                }, new Consumer<Throwable>() {
-                                                                                    @Override
-                                                                                    public void accept(Throwable throwable) throws Exception {
-                                                                                        Log.d("NOTIFICATION_ERROR", throwable.getMessage());
-                                                                                        dialog.dismiss();
-                                                                                        addToCalendar(Common.bookingDate,
-                                                                                                Common.convertTimeSlotToString(Common.currentTimeSlot));
-                                                                                        resestStaticData();
-                                                                                        getActivity().finish();
+                                                                                            }
+                                                                                        }));
 
-                                                                                    }
-                                                                                }));
-                                                                    }
-                                                                }
-                                                            });
+                                                                            }
+                                                                        }
+                                                                    });
+                                                        }
+                                                    });
 
-                                                });
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        if (dialog.isShowing()) {
-                                            dialog.dismiss();
+
                                         }
-//                                        dialog.dismiss();
-                                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    } else {
-                        if (dialog.isShowing()) {
-                            dialog.dismiss();
-                        }
-//                        dialog.dismiss();
-                        resestStaticData();
-                        getActivity().finish();
-                        Toast.makeText(getContext(), "Đặt lịch thành công !", Toast.LENGTH_SHORT).show();
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
 
+                                    if (dialog.isShowing())
+                                        dialog.dismiss();
+                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            if (dialog.isShowing())
+                            dialog.dismiss();
+                            resestStaticData();
+                            getActivity().finish();
+                            Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
     }
 
+
+////                                        FirebaseFirestore.getInstance()
+////                                                .collection("AllSalon")
+////                                                .document(Common.city)
+////                                                .collection("Branch")
+////                                                .document(Common.currentSalon.getSalonId())
+////                                                .collection("Barbers")
+////                                                .document(Common.currentBarber.getBarberId())
+////                                                .collection("Notifications")
+////                                                .document(myNotification.getUid())
+////                                                .set(myNotification)
+////                                                .addOnSuccessListener(aVoid1 -> {
+////
+////                                                    FirebaseFirestore.getInstance()
+////                                                            .collection("Tokens")
+////                                                            .whereEqualTo("userPhone", Common.currentBarber.getUsername())
+////                                                            .limit(1)
+////                                                            .get()
+////                                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+////                                                                @Override
+////                                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+////                                                                    if (task.isSuccessful() && task.getResult().size() > 0) {
+////                                                                        MyToken myToken = new MyToken();
+////                                                                        for (DocumentSnapshot tokensSnapshot : task.getResult())
+////                                                                            myToken = tokensSnapshot.toObject(MyToken.class);
+////                                                                        //create data
+////                                                                        FCMSenData sendRequest = new FCMSenData();
+////                                                                        Map<String, String> dataSend = new HashMap<>();
+////                                                                        dataSend.put(Common.TITLE_KEY, "Thông ");
+////                                                                        dataSend.put(Common.CONTENT_KEY, "Bạn có thông báo mới từ khách " + Common.currentUser.getName());
+////                                                                        sendRequest.setTo(myToken.getToken());
+////                                                                        sendRequest.setData(dataSend);
+////
+////                                                                        compositeDisposable.add(ifcmApi.senNotification(sendRequest)
+////                                                                                .subscribeOn(Schedulers.io())
+////                                                                                .observeOn(AndroidSchedulers.mainThread())
+////                                                                                .subscribe(new Consumer<FCMResponse>() {
+////                                                                                    @Override
+////                                                                                    public void accept(FCMResponse fcmResponse) throws Exception {
+////
+////                                                                                        if (dialog.isShowing())
+////                                                                                            dialog.dismiss();
+////
+////                                                                                        addToCalendar(Common.bookingDate,
+////                                                                                                Common.convertTimeSlotToString(Common.currentTimeSlot));
+////                                                                                        resestStaticData();
+////                                                                                        getActivity().finish();
+////                                                                                        Toast.makeText(getContext(), "Đặt lịch thành công !", Toast.LENGTH_SHORT).show();
+////
+////                                                                                    }
+////                                                                                }, new Consumer<Throwable>() {
+////                                                                                    @Override
+////                                                                                    public void accept(Throwable throwable) throws Exception {
+////                                                                                        Log.d("NOTIFICATION_ERROR", throwable.getMessage());
+////
+////                                                                                        addToCalendar(Common.bookingDate,
+////                                                                                                Common.convertTimeSlotToString(Common.currentTimeSlot));
+////                                                                                        resestStaticData();
+////                                                                                        getActivity().finish();
+////                                                                                        dialog.dismiss();
+////
+////                                                                                    }
+////                                                                                }));
+////                                                                    }
+////                                                                }
+////                                                            });
+////
+////                                                });
+////
+////
+////                                    }
+////                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//
+//                                        if (dialog.isShowing())
+//                                            dialog.dismiss();
+//                                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                    } else {
+//                        if (dialog.isShowing())
+//                            dialog.dismiss();
+//                        resestStaticData();
+//                        getActivity().finish();
+//                        Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//    }
+//
+
     private void addToCalendar(Calendar bookingDate, String startDate) {
+
         String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
         String[] convertTime = startTime.split("-");
         String[] startTimeConvert = convertTime[0].split(":");
@@ -330,6 +476,7 @@ public class BookingStep4Fragment extends Fragment {
         SimpleDateFormat calendarDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
         try {
+
             Date start = calendarDateFormat.parse(startEventTime);
             Date end = calendarDateFormat.parse(endEventTime);
             ContentValues event = new ContentValues();
@@ -396,12 +543,32 @@ public class BookingStep4Fragment extends Fragment {
 
     }
 
-    BroadcastReceiver confirmBookingReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
+//===========================>
+//EvenBus
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void setDataBooking(ConfirmBookingEvent event) {
+        if (event.isConfirm()) {
             setData();
         }
-    };
+    }
+
+
+//===============================
+
 
     private void setData() {
         txt_booking_baber_text.setText(Common.currentBarber.getName());
@@ -429,18 +596,16 @@ public class BookingStep4Fragment extends Fragment {
         ifcmApi = RetrofitClient.getInstance().create(IFCMApi.class);
         //apply format for date display on confics
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
-        localBroadcastManager.registerReceiver(confirmBookingReceiver,
-                new IntentFilter(Common.KEY_CONFIRM_BOOKING));
 
-        dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
-//        dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
+
+       // dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
+       dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
 
     }
 
     @Override
     public void onDestroy() {
-        localBroadcastManager.unregisterReceiver(confirmBookingReceiver);
+
         compositeDisposable.clear();
         super.onDestroy();
     }
@@ -452,7 +617,84 @@ public class BookingStep4Fragment extends Fragment {
 
         View itemView = inflater.inflate(R.layout.fragment_booking_step_four, container, false);
         unbinder = ButterKnife.bind(this, itemView);
+<<<<<<< HEAD
+=======
 
+        cartDataSource = new LocalCartDataSource(CartDatabase.getInstance(getContext()).cartDAO());
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
         return itemView;
     }
+
+
+<<<<<<< HEAD
+    @Override
+    public void onGetAllItemFromCartSuccess(List<CartItem> cartItemList) {
+
+        String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
+        String[] convertTime = startTime.split("-");
+        String[] startTimeConvert = convertTime[0].split(":");
+        int startHourInt = Integer.parseInt(startTimeConvert[0].trim());
+        int startMinInt = Integer.parseInt(startTimeConvert[1].trim());
+
+        Calendar bookingDateWithourHouse = Calendar.getInstance();
+        bookingDateWithourHouse.setTimeInMillis(Common.bookingDate.getTimeInMillis());
+        bookingDateWithourHouse.set(Calendar.HOUR_OF_DAY, startHourInt);
+        bookingDateWithourHouse.set(Calendar.MINUTE, startMinInt);
+        Timestamp timestamp = new Timestamp(bookingDateWithourHouse.getTime());
+
+        BookingInformation bookingInformation = new BookingInformation();
+
+        bookingInformation.setCityBook(Common.city);
+        bookingInformation.setTimestamp(timestamp);
+
+        bookingInformation.setDone(false);
+        bookingInformation.setBarberId(Common.currentBarber.getBarberId());
+        bookingInformation.setBarberName(Common.currentBarber.getName());
+        bookingInformation.setCustomerName(Common.currentUser.getName());
+        bookingInformation.setCustomerPhone(Common.currentUser.getPhoneNumber());
+        bookingInformation.setSalonId(Common.currentSalon.getSalonId());
+        bookingInformation.setSalonAddress(Common.currentSalon.getAddress());
+        bookingInformation.setSalonName(Common.currentSalon.getName());
+        bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
+                .append(" at ")
+                .append(simpleDateFormat.format(bookingDateWithourHouse.getTime())).toString());
+        bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
+        bookingInformation.setCartItemList(cartItemList);//add card item list to booking information
+
+        //submit to banner Document
+
+        DocumentReference bookingdate = FirebaseFirestore.getInstance()
+                .collection("AllSalon")
+                .document(Common.city)
+                .collection("Branch")
+                .document(Common.currentSalon.getSalonId())
+                .collection("Barbers")
+                .document(Common.currentBarber.getBarberId())
+                .collection(Common.simpleDateFormat.format(Common.bookingDate.getTime()))
+                .document(String.valueOf(Common.currentTimeSlot));
+
+        //ghi du lieu
+
+        bookingdate.set(bookingInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                DatabaseUtils.clearCart(CartDatabase.getInstance(getContext()));
+                addToUserBooking(bookingInformation);
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+=======
+//    @Override
+//    public void onGetAllItemFromCartSuccess(List<CartItem> cartItemList) {
+//
+//    }
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
 }
