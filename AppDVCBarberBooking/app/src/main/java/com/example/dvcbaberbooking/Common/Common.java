@@ -207,9 +207,6 @@ public class Common {
 
     public static void updateToken(Context context, final String s) {
 
-
-
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null)
         {
