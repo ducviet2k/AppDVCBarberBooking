@@ -196,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //    }
-<<<<<<< HEAD
     @Override
     public void onBackPressed() {
 
@@ -209,18 +208,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-=======
-//    @Override
-//    public void onBackPressed() {
-//
-//        if (doubleBackToExitPressedOnce) {
-//            super.onBackPressed();
-//            finish();
-//            return;
-//
-//
-//        }
-//
-//    }
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
 }

@@ -1,17 +1,13 @@
 <component name="libraryTable">
-<<<<<<< HEAD:AppDVCBarberBooking/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_10_0_0_jar.xml
   <library name="Gradle: com.jakewharton:butterknife-annotations:10.0.0@jar">
-=======
-  <library name="Gradle: com.jakewharton:butterknife-annotations:10.1.0@jar">
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276:AppDVCBarberBooking/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_10_1_0_jar.xml
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/10.1.0/89dab5253ba211632332dec50afacce52864500e/butterknife-annotations-10.1.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/10.0.0/bfac5a77e20734be4373037d47dfe8bd9b441366/butterknife-annotations-10.0.0.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/10.1.0/5630035f53cf00b9138e597bf713153b9f8911e5/butterknife-annotations-10.1.0-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/10.0.0/d1fb4388ab49ce34972d9bfe68ae5e452275940c/butterknife-annotations-10.0.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/10.1.0/dec010b8adf4f24ba47ec41e54cf02c16f043d33/butterknife-annotations-10.1.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/10.0.0/1f954d94992415702294f1e987f6b57f91ea3f0b/butterknife-annotations-10.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

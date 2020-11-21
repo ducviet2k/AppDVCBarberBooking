@@ -314,10 +314,7 @@ public class Common {
 
     public static void updateToken(Context context, final String s) {
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 4019ad1ee9c8ea497a7ab147bbc5c65f787ee2ac
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             MyToken myToken = new MyToken();
@@ -329,7 +326,10 @@ public class Common {
                     .collection("Tokens")//User
                     .document(user.getPhoneNumber())
                     .set(myToken)
-                    .addOnCompleteListener(task -> {
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                        }
                     });
 
 

@@ -20,18 +20,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.dvcbaberbooking.Common.Common;
-<<<<<<< HEAD
 import com.example.dvcbaberbooking.Database.CartDatabase;
 import com.example.dvcbaberbooking.Database.CartItem;
 import com.example.dvcbaberbooking.Database.DatabaseUtils;
 import com.example.dvcbaberbooking.HomeActivity;
 import com.example.dvcbaberbooking.Interface.ICartItemLoadListener;
 import com.example.dvcbaberbooking.MainActivity;
-=======
-import com.example.dvcbaberbooking.Database.CartDataSource;
-import com.example.dvcbaberbooking.Database.CartDatabase;
-import com.example.dvcbaberbooking.Database.LocalCartDataSource;
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
 import com.example.dvcbaberbooking.Model.BookingInformation;
 import com.example.dvcbaberbooking.Model.EventBus.ConfirmBookingEvent;
 import com.example.dvcbaberbooking.Model.FCMResponse;
@@ -66,28 +60,25 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
 
+import javax.xml.parsers.DocumentBuilder;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
-import io.reactivex.SingleObserver;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class BookingStep4Fragment extends Fragment implements ICartItemLoadListener {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     SimpleDateFormat simpleDateFormat;
-<<<<<<< HEAD
 
-=======
-    CartDataSource cartDataSource;
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     Unbinder unbinder;
     AlertDialog dialog;
     IFCMApi ifcmApi;
@@ -110,101 +101,8 @@ public class BookingStep4Fragment extends Fragment implements ICartItemLoadListe
         //tao man booking
     void confirmBooking() {
         dialog.show();
-<<<<<<< HEAD
         DatabaseUtils.getAllCart(CartDatabase.getInstance(getContext()),
                 this);
-=======
-        compositeDisposable.add(cartDataSource.getAllItemFromCart(Common.currentUser.getPhoneNumber())
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(cartItems -> {
-
-
-            String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
-            String[] convertTime = startTime.split("-");
-            String[] startTimeConvert = convertTime[0].split(":");
-            int startHourInt = Integer.parseInt(startTimeConvert[0].trim());
-            int startMinInt = Integer.parseInt(startTimeConvert[1].trim());
-
-            Calendar bookingDateWithourHouse = Calendar.getInstance();
-            bookingDateWithourHouse.setTimeInMillis(Common.bookingDate.getTimeInMillis());
-            bookingDateWithourHouse.set(Calendar.HOUR_OF_DAY, startHourInt);
-            bookingDateWithourHouse.set(Calendar.MINUTE, startMinInt);
-            Timestamp timestamp = new Timestamp(bookingDateWithourHouse.getTime());
-
-            BookingInformation bookingInformation = new BookingInformation();
-
-            bookingInformation.setCityBook(Common.city);
-            bookingInformation.setTimestamp(timestamp);
-
-            bookingInformation.setDone(false);
-            bookingInformation.setBarberId(Common.currentBarber.getBarberId());
-            bookingInformation.setBarberName(Common.currentBarber.getName());
-            bookingInformation.setCustomerName(Common.currentUser.getName());
-            bookingInformation.setCustomerPhone(Common.currentUser.getPhoneNumber());
-            bookingInformation.setSalonId(Common.currentSalon.getSalonId());
-            bookingInformation.setSalonAddress(Common.currentSalon.getAddress());
-            bookingInformation.setSalonName(Common.currentSalon.getName());
-            bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
-                    .append(" at ")
-                    .append(simpleDateFormat.format(bookingDateWithourHouse.getTime())).toString());
-            bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
-            bookingInformation.setCartItemList(cartItems);//add card item list to booking information
-
-            //submit to banner Document
-
-            DocumentReference bookingdate = FirebaseFirestore.getInstance()
-                    .collection("AllSalon")
-                    .document(Common.city)
-                    .collection("Branch")
-                    .document(Common.currentSalon.getSalonId())
-                    .collection("Barbers")
-                    .document(Common.currentBarber.getBarberId())
-                    .collection(Common.simpleDateFormat.format(Common.bookingDate.getTime()))
-                    .document(String.valueOf(Common.currentTimeSlot));
-
-            //ghi du lieu
-
-            bookingdate.set(bookingInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-
-                   // DatabaseUtils.clearCart(CartDatabase.getInstance(getContext()));
-                    cartDataSource.clearCart(Common.currentUser.getPhoneNumber())
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new SingleObserver<Integer>() {
-                                @Override
-                                public void onSubscribe(Disposable d) {
-
-                                }
-
-                                @Override
-                                public void onSuccess(Integer integer) {
-                                    addToUserBooking(bookingInformation);
-
-                                }
-
-                                @Override
-                                public void onError(Throwable e) {
-                                    Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }, throwable -> {
-            Toast.makeText(getContext(), ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
-        }));
-//        DatabaseUtils.getAllCart(CartDatabase.getInstance(getContext()),
-//                this);
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     }
 
 
@@ -282,10 +180,6 @@ public class BookingStep4Fragment extends Fragment implements ICartItemLoadListe
                                                                                             public void accept(FCMResponse fcmResponse) throws Exception {
                                                                                                 if (dialog.isShowing())
                                                                                                 dialog.dismiss();
-<<<<<<< HEAD
-=======
-
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
                                                                                                 addToCalendar(Common.bookingDate,
                                                                                                         Common.convertTimeSlotToString(Common.currentTimeSlot));
                                                                                                 resestStaticData();
@@ -299,10 +193,6 @@ public class BookingStep4Fragment extends Fragment implements ICartItemLoadListe
                                                                                             public void accept(Throwable throwable) throws Exception {
                                                                                                 if (dialog.isShowing())
                                                                                                     dialog.dismiss();
-<<<<<<< HEAD
-=======
-//                                                                                                Log.d("NOTIFICATION_ERROR", throwable.getMessage());
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
                                                                                                     addToCalendar(Common.bookingDate,
                                                                                                         Common.convertTimeSlotToString(Common.currentTimeSlot));
                                                                                                 resestStaticData();
@@ -617,16 +507,10 @@ public class BookingStep4Fragment extends Fragment implements ICartItemLoadListe
 
         View itemView = inflater.inflate(R.layout.fragment_booking_step_four, container, false);
         unbinder = ButterKnife.bind(this, itemView);
-<<<<<<< HEAD
-=======
-
-        cartDataSource = new LocalCartDataSource(CartDatabase.getInstance(getContext()).cartDAO());
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
         return itemView;
     }
 
 
-<<<<<<< HEAD
     @Override
     public void onGetAllItemFromCartSuccess(List<CartItem> cartItemList) {
 
@@ -691,10 +575,4 @@ public class BookingStep4Fragment extends Fragment implements ICartItemLoadListe
             }
         });
     }
-=======
-//    @Override
-//    public void onGetAllItemFromCartSuccess(List<CartItem> cartItemList) {
-//
-//    }
->>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
 }
