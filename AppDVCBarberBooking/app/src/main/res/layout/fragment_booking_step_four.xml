@@ -191,7 +191,8 @@
             android:fontFamily="@font/bellerose"
             android:text="Xác nhận"
             android:textColor="@android:color/white"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            />
 
     </LinearLayout>
 </LinearLayout>

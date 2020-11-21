@@ -3,10 +3,14 @@ package com.example.dvcbaberbooking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.text.TextUtils;
+import android.transition.Transition;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -93,7 +97,6 @@ public class HomeActivity extends AppCompatActivity {
 
             if (islogin) {
                 dialog.show();
-
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 //check if user
                 //save userPhone by Paper
@@ -110,8 +113,8 @@ public class HomeActivity extends AppCompatActivity {
                                         showUpdateDialog(user.getPhoneNumber());
                                     } else {
                                         Common.currentUser = userSnapShot.toObject(User.class);
-                                        showUpdateDialog(user.getPhoneNumber());
-//                                        bottomNavigationView.setSelectedItemId(R.id.action_home);
+//                                        showUpdateDialog(user.getPhoneNumber());
+                                        bottomNavigationView.setSelectedItemId(R.id.action_home);
                                     }
                                     if (dialog.isShowing())
                                         dialog.dismiss();
@@ -145,11 +148,17 @@ public class HomeActivity extends AppCompatActivity {
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
-                    .commit();
+            FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
+                    transition.replace(R.id.fragment_container, fragment);
+                    transition.commitAllowingStateLoss();
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     private void showUpdateDialog(final String phoneNumber) {

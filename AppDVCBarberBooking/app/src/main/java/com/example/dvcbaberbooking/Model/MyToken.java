@@ -7,14 +7,15 @@ public class MyToken {
     private Common.TOKEN_TYPE tokenType;
     private String token;
 
+    public MyToken() {
+    }
+
     public MyToken(String userPhone, Common.TOKEN_TYPE tokenType, String token) {
         this.userPhone = userPhone;
         this.tokenType = tokenType;
         this.token = token;
     }
 
-    public MyToken() {
-    }
 
     public String getUserPhone() {
         return userPhone;

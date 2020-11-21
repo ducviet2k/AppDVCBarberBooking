@@ -21,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CartActivity extends AppCompatActivity implements ICartItemLoadListener, ICartItemUpdateListener, ISumCartListener {
     @BindView(R.id.recycler_cart)
@@ -29,8 +30,16 @@ public class CartActivity extends AppCompatActivity implements ICartItemLoadList
     @BindView(R.id.txt_total_price)
     TextView txt_total_price;
 
-    @BindView(R.id.btn_submit_cart)
-    Button btn_submit_cart;
+    @BindView(R.id.btn_clear_cart)
+    Button btn_clear_cart;
+    //xoa dich vu
+    @OnClick(R.id.btn_clear_cart)
+    void clearCart() {
+        DatabaseUtils.clearCart(cartDatabase);
+
+        //update adapter
+        DatabaseUtils.getAllCart(cartDatabase, this);
+    }
 
     CartDatabase cartDatabase;
 
@@ -38,30 +47,30 @@ public class CartActivity extends AppCompatActivity implements ICartItemLoadList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-         cartDatabase=CartDatabase.getInstance(this);
+        cartDatabase = CartDatabase.getInstance(this);
         ButterKnife.bind(CartActivity.this);
 
         DatabaseUtils.getAllCart(cartDatabase, this);
 
         //View
         recycler_cart.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recycler_cart.setLayoutManager(linearLayoutManager);
-        recycler_cart.addItemDecoration(new DividerItemDecoration(this,linearLayoutManager.getOrientation()));
+        recycler_cart.addItemDecoration(new DividerItemDecoration(this, linearLayoutManager.getOrientation()));
     }
 
     @Override
     public void onGetAllItemFromCartSuccess(List<CartItem> cartItemList) {
         //lay tat du lieu tu data va gan vao recylerview
 
-        MyCartAdapter adapter=new MyCartAdapter(this,cartItemList,this);
+        MyCartAdapter adapter = new MyCartAdapter(this, cartItemList, this);
         recycler_cart.setAdapter(adapter);
     }
 
 
     @Override
     public void onCartItemUpdateSuccess() {
-        DatabaseUtils.sumCart(cartDatabase,this);
+        DatabaseUtils.sumCart(cartDatabase, this);
 
     }
 
