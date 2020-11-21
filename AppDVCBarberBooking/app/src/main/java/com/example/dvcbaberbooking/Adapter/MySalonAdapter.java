@@ -23,7 +23,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySalonAdapter extends RecyclerView.Adapter<MySalonAdapter.MyViewHolder> {
+public class MySalonAdapter  extends RecyclerView.Adapter<MySalonAdapter.MyViewHolder>{
     Context context;
     List<Salon> salonList;
     List<CardView> cardViewList;

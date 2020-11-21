@@ -1,12 +1,16 @@
 package com.example.dvcbaberbooking.Model;
 
+import com.example.dvcbaberbooking.Database.CartItem;
 import com.google.firebase.Timestamp;
+
+import java.util.List;
 
 public class BookingInformation{
     private String cityBook,customerName, customerPhone, time, barberId, barberName, salonId, salonName, salonAddress;
     private Long slot;
     private Timestamp timestamp;
     private boolean done;
+    private List<CartItem> cartItemList;
 
     public BookingInformation() {
     }
@@ -117,5 +121,13 @@ public class BookingInformation{
 
     public void setCityBook(String cityBook) {
         this.cityBook = cityBook;
+    }
+
+    public List<CartItem> getCartItemList() {
+        return cartItemList;
+    }
+
+    public void setCartItemList(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
     }
 }

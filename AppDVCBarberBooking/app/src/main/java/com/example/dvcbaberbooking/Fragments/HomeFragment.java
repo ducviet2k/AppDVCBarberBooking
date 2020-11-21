@@ -29,6 +29,7 @@ import com.example.dvcbaberbooking.CartActivity;
 import com.example.dvcbaberbooking.Common.Common;
 import com.example.dvcbaberbooking.Database.CartDatabase;
 import com.example.dvcbaberbooking.Database.DatabaseUtils;
+import com.example.dvcbaberbooking.HistoryActivity;
 import com.example.dvcbaberbooking.Interface.IBannerLoadListener;
 import com.example.dvcbaberbooking.Interface.IBookingInfoLoadListener;
 import com.example.dvcbaberbooking.Interface.IBookingInformationChangeListener;
@@ -215,6 +216,11 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
         startActivity(new Intent(getActivity(), CartActivity.class));
     }
 
+    @OnClick(R.id.card_view_histoy)
+    void opHistoryActivity() {
+        startActivity(new Intent(getActivity(), HistoryActivity.class));
+    }
+
     // firestore
     CollectionReference bannerRef, lookbookRef;
     IBannerLoadListener iBannerLoadListener;
@@ -247,7 +253,7 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
     }
 
     private void loadUserBooking() {
-        CollectionReference userBooking = FirebaseFirestore.getInstance()
+        final CollectionReference userBooking = FirebaseFirestore.getInstance()
                 .collection("User")
                 .document(Common.currentUser.getPhoneNumber())
                 .collection("Booking");
@@ -257,9 +263,9 @@ public class HomeFragment extends Fragment implements IBannerLoadListener, ILook
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
 
-        Timestamp todayTimestamp = new Timestamp(calendar.getTime());
+        Timestamp timestamp = new Timestamp(calendar.getTime());
         userBooking
-                .whereGreaterThanOrEqualTo("timestamp", todayTimestamp)
+                .whereGreaterThanOrEqualTo("timestamp", timestamp)
                 .whereEqualTo("done", false)
                 .limit(1)
                 .get()
