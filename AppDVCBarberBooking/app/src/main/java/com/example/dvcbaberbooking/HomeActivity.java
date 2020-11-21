@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
@@ -56,6 +57,11 @@ public class HomeActivity extends AppCompatActivity {
     AlertDialog dialog;
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         //check Rating dialog
@@ -78,6 +84,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+//
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +124,13 @@ public class HomeActivity extends AppCompatActivity {
                                         showUpdateDialog(user.getPhoneNumber());
                                     } else {
                                         Common.currentUser = userSnapShot.toObject(User.class);
+<<<<<<< HEAD
 //                                        showUpdateDialog(user.getPhoneNumber());
                                         bottomNavigationView.setSelectedItemId(R.id.action_home);
+=======
+                                       showUpdateDialog(user.getPhoneNumber());
+                                        //bottomNavigationView.setSelectedItemId(R.id.action_home);
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
                                     }
                                     if (dialog.isShowing())
                                         dialog.dismiss();
@@ -209,7 +225,7 @@ public class HomeActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             dialog.isShowing();
                             dialog.dismiss();
-                            bottomSheetDialog.dismiss();
+                        //    bottomSheetDialog.dismiss();
                             Toast.makeText(HomeActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });

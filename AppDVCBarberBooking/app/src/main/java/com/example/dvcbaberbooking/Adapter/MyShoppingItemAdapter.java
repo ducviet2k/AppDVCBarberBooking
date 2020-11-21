@@ -12,9 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dvcbaberbooking.Common.Common;
+import com.example.dvcbaberbooking.Database.CartDataSource;
 import com.example.dvcbaberbooking.Database.CartDatabase;
 import com.example.dvcbaberbooking.Database.CartItem;
-import com.example.dvcbaberbooking.Database.DatabaseUtils;
+import com.example.dvcbaberbooking.Database.LocalCartDataSource;
 import com.example.dvcbaberbooking.Interface.IRecyclerItemSelectedListener;
 import com.example.dvcbaberbooking.Model.ShoppingItem;
 import com.example.dvcbaberbooking.R;
@@ -22,15 +23,26 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+
 public class MyShoppingItemAdapter extends RecyclerView.Adapter<MyShoppingItemAdapter.MyViewHolder> {
     Context context;
     List<ShoppingItem> shoppingItemList;
-    CartDatabase cartDatabase;
+//    CartDatabase cartDatabase;
+    CartDataSource cartDataSource;
+    CompositeDisposable compositeDisposable;
+
+    public void onDestroy(){
+        compositeDisposable.clear();
+    }
 
     public MyShoppingItemAdapter(Context context, List<ShoppingItem> shoppingItemList) {
         this.context = context;
         this.shoppingItemList = shoppingItemList;
-        cartDatabase=CartDatabase.getInstance(context);
+        cartDataSource=new LocalCartDataSource(CartDatabase.getInstance(context).cartDAO());
+        compositeDisposable = new CompositeDisposable();
     }
 
     @NonNull
@@ -61,8 +73,14 @@ public class MyShoppingItemAdapter extends RecyclerView.Adapter<MyShoppingItemAd
                 cartItem.setUserPhone(Common.currentUser.getPhoneNumber());
 
                 //theem vaof db
-                DatabaseUtils.insertToCart(cartDatabase,cartItem);
-                Toast.makeText(context, "Đã thêm dịch vụ thành công", Toast.LENGTH_SHORT).show();
+               // DatabaseUtils.insertToCart(cartDatabase,cartItem);
+                compositeDisposable.add(cartDataSource.insert(cartItem)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        ()-> Toast.makeText(context, "Đã thêm dịch vụ thành công", Toast.LENGTH_SHORT).show(),
+                        throwable -> Toast.makeText(context, ""+ throwable.getMessage(), Toast.LENGTH_SHORT).show()));
+
             }
         });
     }
