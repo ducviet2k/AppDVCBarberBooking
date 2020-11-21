@@ -6,8 +6,12 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+<<<<<<< HEAD
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Token" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+=======
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -33,6 +37,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9661db9e-7a54-452e-b6ff-4c6d6f1ffe1d" name="Default Changelist" comment="">
+<<<<<<< HEAD
+=======
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_room_room_common_2_1_0_beta01_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_room_room_runtime_2_1_0_beta01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_room_room_rxjava2_2_1_0_beta01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_sqlite_sqlite_framework_2_0_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_runtime_10_1_0_aar.xml" afterDir="false" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -45,6 +57,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
@@ -53,8 +66,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_collection_collection_1_1_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_collection_collection_1_1_0_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_solver_2_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_solver_2_0_1_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_common_2_1_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_common_2_1_0_jar.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_recyclerview_recyclerview_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_recyclerview_recyclerview_1_1_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_room_room_common_2_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_room_room_common_2_0_0_jar.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_recyclerview_recyclerview_1_0_0_aar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_room_room_common_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_room_room_runtime_2_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_recyclerview_recyclerview_1_1_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_sqlite_sqlite_2_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_sqlite_sqlite_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_sqlite_sqlite_framework_2_0_0_aar.xml" beforeDir="false" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_esotericsoftware_kryo_4_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_esotericsoftware_kryo_4_0_1_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_esotericsoftware_minlog_1_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_esotericsoftware_minlog_1_3_0_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_esotericsoftware_reflectasm_1_11_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_esotericsoftware_reflectasm_1_11_3_jar.xml" afterDir="false" />
@@ -68,7 +89,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_j2objc_j2objc_annotations_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_j2objc_j2objc_annotations_1_1_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_protobuf_protobuf_lite_3_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_protobuf_protobuf_lite_3_0_1_jar.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_10_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_10_0_0_jar.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_10_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_10_1_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_10_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_10_1_0_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_runtime_10_0_0_aar.xml" beforeDir="false" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_karumi_dexter_5_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_karumi_dexter_5_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_javawriter_2_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_javawriter_2_1_1_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_12_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_12_0_jar.xml" afterDir="false" />
@@ -110,8 +137,10 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MyCartAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MyCartAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MySalonAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MySalonAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MyShoppingItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MyShoppingItemAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MyTimeSlotAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Adapter/MyTimeSlotAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/CartActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/CartActivity.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Database/DatabaseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Database/DatabaseUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/BookingStep4Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/BookingStep4Fragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/HomeFragment.java" afterDir="false" />
@@ -119,6 +148,17 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Model/BookingInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Model/BookingInformation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Model/MyToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Model/MyToken.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Common/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Common/Common.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Database/CartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Database/CartDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Database/DatabaseUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/BookingStep4Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/BookingStep4Fragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/ShoppingFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Fragments/ShoppingFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/HomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Model/BookingInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dvcbaberbooking/Model/BookingInformation.java" afterDir="false" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_cart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_cart.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_booking_step_four.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_booking_step_four.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
@@ -173,7 +213,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
     <property name="memory.settings.postsync.last.time.stamp" value="1605971645051" />
+=======
+    <property name="memory.settings.postsync.last.time.stamp" value="1605705919653" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -282,8 +329,17 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="752" y="183" key="#com.intellij.ide.util.MemberChooser" timestamp="1605863879135">
       <screen x="55" y="23" width="1865" height="1057" />
+=======
+    <state x="318" y="290" key="#PSD" timestamp="1605760235992">
+      <screen x="54" y="23" width="1866" height="1057" />
+    </state>
+    <state x="318" y="290" key="#PSD/54.23.1866.1057@54.23.1866.1057" timestamp="1605760235992" />
+    <state x="752" y="184" key="#com.intellij.ide.util.MemberChooser" timestamp="1605754928561">
+      <screen x="54" y="23" width="1866" height="1057" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     </state>
     <state x="574" y="127" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1602322721667" />
     <state x="574" y="131" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1605188727130" />
@@ -293,7 +349,12 @@
     <state x="539" y="136" key="#com.intellij.ide.util.MemberChooser/46.23.1320.745@46.23.1320.745" timestamp="1604928662251" />
     <state x="749" y="184" key="#com.intellij.ide.util.MemberChooser/51.23.1869.1057@51.23.1869.1057" timestamp="1602384266300" />
     <state x="750" y="184" key="#com.intellij.ide.util.MemberChooser/53.23.1867.1057@53.23.1867.1057" timestamp="1603008256028" />
+<<<<<<< HEAD
     <state x="752" y="183" key="#com.intellij.ide.util.MemberChooser/55.23.1865.1057@55.23.1865.1057" timestamp="1605863879135" />
+=======
+    <state x="752" y="184" key="#com.intellij.ide.util.MemberChooser/54.23.1866.1057@54.23.1866.1057" timestamp="1605754928561" />
+    <state x="752" y="183" key="#com.intellij.ide.util.MemberChooser/55.23.1865.1057@55.23.1865.1057" timestamp="1605105968638" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     <state x="465" y="283" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1602344799318">
       <screen x="51" y="23" width="1869" height="1057" />
     </state>
@@ -302,6 +363,10 @@
       <screen x="43" y="23" width="1323" height="745" />
     </state>
     <state x="375" y="149" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1366.23.1280.1001/43.23.1323.745@43.23.1323.745" timestamp="1602986196139" />
+    <state x="531" y="305" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1605760542543">
+      <screen x="54" y="23" width="1866" height="1057" />
+    </state>
+    <state x="531" y="305" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/54.23.1866.1057@54.23.1866.1057" timestamp="1605760542543" />
     <state x="296" y="290" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1604928918529">
       <screen x="46" y="23" width="1320" height="745" />
     </state>
@@ -321,7 +386,11 @@
       <screen x="53" y="23" width="1867" height="1057" />
     </state>
     <state x="760" y="433" key="Github.ShareDialog/53.23.1867.1057@53.23.1867.1057" timestamp="1602862026141" />
+<<<<<<< HEAD
     <state width="1406" height="420" key="GridCell.Tab.0.bottom" timestamp="1605973183663">
+=======
+    <state width="1473" height="53" key="GridCell.Tab.0.bottom" timestamp="1605763424106">
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <screen x="54" y="23" width="1866" height="1057" />
     </state>
     <state width="1476" height="248" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1602322050404" />
@@ -338,11 +407,19 @@
     <state width="1700" height="405" key="GridCell.Tab.0.bottom/48.23.1872.1057@48.23.1872.1057" timestamp="1602836176009" />
     <state width="1700" height="405" key="GridCell.Tab.0.bottom/49.23.1871.1057@49.23.1871.1057" timestamp="1602836384504" />
     <state width="1385" height="25" key="GridCell.Tab.0.bottom/51.23.1869.1057@51.23.1869.1057" timestamp="1604136734033" />
+<<<<<<< HEAD
     <state width="1406" height="420" key="GridCell.Tab.0.bottom/52.23.1868.1057@52.23.1868.1057" timestamp="1605973018680" />
     <state width="1700" height="122" key="GridCell.Tab.0.bottom/53.23.1867.1057@53.23.1867.1057" timestamp="1603026062945" />
     <state width="1406" height="420" key="GridCell.Tab.0.bottom/54.23.1866.1057@54.23.1866.1057" timestamp="1605973183663" />
     <state width="1823" height="251" key="GridCell.Tab.0.bottom/55.23.1865.1057@55.23.1865.1057" timestamp="1605419683932" />
     <state width="1406" height="420" key="GridCell.Tab.0.center" timestamp="1605973183662">
+=======
+    <state width="1823" height="25" key="GridCell.Tab.0.bottom/52.23.1868.1057@52.23.1868.1057" timestamp="1605711486300" />
+    <state width="1700" height="122" key="GridCell.Tab.0.bottom/53.23.1867.1057@53.23.1867.1057" timestamp="1603026062945" />
+    <state width="1473" height="53" key="GridCell.Tab.0.bottom/54.23.1866.1057@54.23.1866.1057" timestamp="1605763424106" />
+    <state width="1473" height="280" key="GridCell.Tab.0.bottom/55.23.1865.1057@55.23.1865.1057" timestamp="1605719022567" />
+    <state width="1473" height="53" key="GridCell.Tab.0.center" timestamp="1605763424105">
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <screen x="54" y="23" width="1866" height="1057" />
     </state>
     <state width="1476" height="248" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1602322050404" />
@@ -359,11 +436,19 @@
     <state width="1700" height="405" key="GridCell.Tab.0.center/48.23.1872.1057@48.23.1872.1057" timestamp="1602836176008" />
     <state width="1700" height="405" key="GridCell.Tab.0.center/49.23.1871.1057@49.23.1871.1057" timestamp="1602836384504" />
     <state width="1385" height="25" key="GridCell.Tab.0.center/51.23.1869.1057@51.23.1869.1057" timestamp="1604136734032" />
+<<<<<<< HEAD
     <state width="1406" height="420" key="GridCell.Tab.0.center/52.23.1868.1057@52.23.1868.1057" timestamp="1605973018679" />
     <state width="1700" height="122" key="GridCell.Tab.0.center/53.23.1867.1057@53.23.1867.1057" timestamp="1603026062944" />
     <state width="1406" height="420" key="GridCell.Tab.0.center/54.23.1866.1057@54.23.1866.1057" timestamp="1605973183662" />
     <state width="1823" height="251" key="GridCell.Tab.0.center/55.23.1865.1057@55.23.1865.1057" timestamp="1605419683931" />
     <state width="1406" height="420" key="GridCell.Tab.0.left" timestamp="1605973183661">
+=======
+    <state width="1823" height="25" key="GridCell.Tab.0.center/52.23.1868.1057@52.23.1868.1057" timestamp="1605711486300" />
+    <state width="1700" height="122" key="GridCell.Tab.0.center/53.23.1867.1057@53.23.1867.1057" timestamp="1603026062944" />
+    <state width="1473" height="53" key="GridCell.Tab.0.center/54.23.1866.1057@54.23.1866.1057" timestamp="1605763424105" />
+    <state width="1473" height="280" key="GridCell.Tab.0.center/55.23.1865.1057@55.23.1865.1057" timestamp="1605719022566" />
+    <state width="1473" height="53" key="GridCell.Tab.0.left" timestamp="1605763424105">
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <screen x="54" y="23" width="1866" height="1057" />
     </state>
     <state width="1476" height="248" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1602322050404" />
@@ -380,11 +465,19 @@
     <state width="1700" height="405" key="GridCell.Tab.0.left/48.23.1872.1057@48.23.1872.1057" timestamp="1602836176008" />
     <state width="1700" height="405" key="GridCell.Tab.0.left/49.23.1871.1057@49.23.1871.1057" timestamp="1602836384503" />
     <state width="1385" height="25" key="GridCell.Tab.0.left/51.23.1869.1057@51.23.1869.1057" timestamp="1604136734032" />
+<<<<<<< HEAD
     <state width="1406" height="420" key="GridCell.Tab.0.left/52.23.1868.1057@52.23.1868.1057" timestamp="1605973018675" />
     <state width="1700" height="122" key="GridCell.Tab.0.left/53.23.1867.1057@53.23.1867.1057" timestamp="1603026062944" />
     <state width="1406" height="420" key="GridCell.Tab.0.left/54.23.1866.1057@54.23.1866.1057" timestamp="1605973183661" />
     <state width="1823" height="251" key="GridCell.Tab.0.left/55.23.1865.1057@55.23.1865.1057" timestamp="1605419683930" />
     <state width="1406" height="420" key="GridCell.Tab.0.right" timestamp="1605973183663">
+=======
+    <state width="1823" height="25" key="GridCell.Tab.0.left/52.23.1868.1057@52.23.1868.1057" timestamp="1605711486299" />
+    <state width="1700" height="122" key="GridCell.Tab.0.left/53.23.1867.1057@53.23.1867.1057" timestamp="1603026062944" />
+    <state width="1473" height="53" key="GridCell.Tab.0.left/54.23.1866.1057@54.23.1866.1057" timestamp="1605763424105" />
+    <state width="1473" height="280" key="GridCell.Tab.0.left/55.23.1865.1057@55.23.1865.1057" timestamp="1605719022566" />
+    <state width="1473" height="53" key="GridCell.Tab.0.right" timestamp="1605763424106">
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <screen x="54" y="23" width="1866" height="1057" />
     </state>
     <state width="1476" height="248" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1602322050404" />
@@ -401,10 +494,17 @@
     <state width="1700" height="405" key="GridCell.Tab.0.right/48.23.1872.1057@48.23.1872.1057" timestamp="1602836176009" />
     <state width="1700" height="405" key="GridCell.Tab.0.right/49.23.1871.1057@49.23.1871.1057" timestamp="1602836384504" />
     <state width="1385" height="25" key="GridCell.Tab.0.right/51.23.1869.1057@51.23.1869.1057" timestamp="1604136734032" />
+<<<<<<< HEAD
     <state width="1406" height="420" key="GridCell.Tab.0.right/52.23.1868.1057@52.23.1868.1057" timestamp="1605973018679" />
     <state width="1700" height="122" key="GridCell.Tab.0.right/53.23.1867.1057@53.23.1867.1057" timestamp="1603026062945" />
     <state width="1406" height="420" key="GridCell.Tab.0.right/54.23.1866.1057@54.23.1866.1057" timestamp="1605973183663" />
     <state width="1823" height="251" key="GridCell.Tab.0.right/55.23.1865.1057@55.23.1865.1057" timestamp="1605419683931" />
+=======
+    <state width="1823" height="25" key="GridCell.Tab.0.right/52.23.1868.1057@52.23.1868.1057" timestamp="1605711486300" />
+    <state width="1700" height="122" key="GridCell.Tab.0.right/53.23.1867.1057@53.23.1867.1057" timestamp="1603026062945" />
+    <state width="1473" height="53" key="GridCell.Tab.0.right/54.23.1866.1057@54.23.1866.1057" timestamp="1605763424106" />
+    <state width="1473" height="280" key="GridCell.Tab.0.right/55.23.1865.1057@55.23.1865.1057" timestamp="1605719022567" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     <state width="1477" height="188" key="GridCell.Tab.1.bottom" timestamp="1604650071060">
       <screen x="55" y="23" width="1865" height="1057" />
     </state>
@@ -429,7 +529,11 @@
     <state width="1099" height="320" key="GridCell.Tab.1.right/1366.23.1280.1001/39.23.1327.745@1366.23.1280.1001" timestamp="1602488801598" />
     <state width="1564" height="374" key="GridCell.Tab.1.right/51.23.1869.1057@51.23.1869.1057" timestamp="1602346462539" />
     <state width="1477" height="188" key="GridCell.Tab.1.right/55.23.1865.1057@55.23.1865.1057" timestamp="1604650071060" />
+<<<<<<< HEAD
     <state x="620" y="328" key="com.intellij.ide.util.TipDialog" timestamp="1605974583225">
+=======
+    <state x="620" y="328" key="com.intellij.ide.util.TipDialog" timestamp="1605753502098">
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
       <screen x="55" y="23" width="1865" height="1057" />
     </state>
     <state x="465" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1602315342184" />
@@ -442,7 +546,11 @@
     <state x="618" y="328" key="com.intellij.ide.util.TipDialog/52.23.1868.1057@52.23.1868.1057" timestamp="1602775808303" />
     <state x="619" y="328" key="com.intellij.ide.util.TipDialog/53.23.1867.1057@53.23.1867.1057" timestamp="1602993131316" />
     <state x="619" y="328" key="com.intellij.ide.util.TipDialog/54.23.1866.1057@54.23.1866.1057" timestamp="1604156441516" />
+<<<<<<< HEAD
     <state x="620" y="328" key="com.intellij.ide.util.TipDialog/55.23.1865.1057@55.23.1865.1057" timestamp="1605974583225" />
+=======
+    <state x="620" y="328" key="com.intellij.ide.util.TipDialog/55.23.1865.1057@55.23.1865.1057" timestamp="1605753502098" />
+>>>>>>> 16f49b7e73952a3ec410370f0ae495f17a09a276
     <state x="1692" y="295" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1602402403878">
       <screen x="1366" y="23" width="1280" height="1001" />
     </state>

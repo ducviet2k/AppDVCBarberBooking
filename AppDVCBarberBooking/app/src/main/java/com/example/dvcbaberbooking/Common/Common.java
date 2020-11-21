@@ -326,10 +326,7 @@ public class Common {
                     .collection("Tokens")//User
                     .document(user.getPhoneNumber())
                     .set(myToken)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                        }
+                    .addOnCompleteListener(task -> {
                     });
 
 
